@@ -14,19 +14,27 @@ export const todoSlice = createSlice({
             }
         },
         removeAll: (state, action) => {
+            const arr = [...state.items]
             let i = 0
-            while (i < state.items.length) {
-                if (state.items[i] === action.payload) {
-                    state.items.splice(i, 1)
+            while (i < arr.length) {
+                if (arr[i] === action.payload) {
+                    arr.splice(i, 1)
                 } else {
                     i++
                 }
             }
+            return {
+                items: arr
+            }
         },
         removeOne: (state, action) => {
-            let i = state.items.indexOf(action.payload)
+            const arr = [...state.items]
+            let i = arr.indexOf(action.payload)
             if (i > -1) {
-                state.items.splice(i, 1)
+                arr.splice(i, 1)
+            }
+            return {
+                items: arr
             }
         },
         clear: () => {
